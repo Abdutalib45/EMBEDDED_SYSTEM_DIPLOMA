@@ -1,0 +1,13 @@
+15:45:53 **** Incremental Build of configuration Debug for project ex2 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\ex2.o" "..\\src\\ex2.c" 
+..\src\ex2.c: In function 'main':
+..\src\ex2.c:16:35: error: expected ';' before 'scanf'
+   16 |         printf("Enter a integer:")
+      |                                   ^
+      |                                   ;
+   17 |         scanf("%d",&i);
+      |         ~~~~~                      
+
+15:45:53 Build Finished (took 100ms)
+
