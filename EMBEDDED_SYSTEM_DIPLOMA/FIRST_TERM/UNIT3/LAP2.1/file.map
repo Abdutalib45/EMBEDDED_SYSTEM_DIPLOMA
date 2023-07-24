@@ -2,50 +2,50 @@
 Memory Configuration
 
 Name             Origin             Length             Attributes
-rom              0x80000000         0x00020000         xr
+rom              0x08000000         0x00020000         xr
 ram              0x20000000         0x00005000         xrw
 *default*        0x00000000         0xffffffff
 
 Linker script and memory map
 
 
-.text           0x80000000      0x188
+.text           0x08000000      0x190
  *(.vectors*)
- .vectors       0x80000000       0x1c startup.o
-                0x80000000                vectors
+ .vectors       0x08000000       0x1c startup.o
+                0x08000000                vectors
  *(.text)
- .text          0x8000001c       0xa8 main.o
-                0x8000001c                main
- .text          0x800000c4       0xc4 startup.o
-                0x800000c4                USAGE_Fault_Handler
-                0x800000c4                MM_Handler
-                0x800000c4                MAIN_Handler
-                0x800000c4                BUS_Fault_Handler
-                0x800000c4                H_Handler
-                0x800000c4                NMI_Handler
-                0x800000d0                reset_Handler
+ .text          0x0800001c       0xb0 main.o
+                0x0800001c                main
+ .text          0x080000cc       0xc4 startup.o
+                0x080000cc                USAGE_Fault_Handler
+                0x080000cc                MM_Handler
+                0x080000cc                MAIN_Handler
+                0x080000cc                BUS_Fault_Handler
+                0x080000cc                H_Handler
+                0x080000cc                NMI_Handler
+                0x080000d8                reset_Handler
  *(.rodata)
-                0x80000188                _E_TEXT = .
+                0x08000190                _E_TEXT = .
 
-.glue_7         0x80000188        0x0
+.glue_7         0x08000190        0x0
  .glue_7        0x00000000        0x0 linker stubs
 
-.glue_7t        0x80000188        0x0
+.glue_7t        0x08000190        0x0
  .glue_7t       0x00000000        0x0 linker stubs
 
-.vfp11_veneer   0x80000188        0x0
+.vfp11_veneer   0x08000190        0x0
  .vfp11_veneer  0x00000000        0x0 linker stubs
 
-.v4_bx          0x80000188        0x0
+.v4_bx          0x08000190        0x0
  .v4_bx         0x00000000        0x0 linker stubs
 
-.iplt           0x80000188        0x0
+.iplt           0x08000190        0x0
  .iplt          0x00000000        0x0 main.o
 
-.rel.dyn        0x80000188        0x0
+.rel.dyn        0x08000190        0x0
  .rel.iplt      0x00000000        0x0 main.o
 
-.data           0x20000000        0x4 load address 0x80000188
+.data           0x20000000        0x4 load address 0x08000190
                 0x20000000                _S_DATA = .
  *(.data)
  .data          0x20000000        0x4 main.o
@@ -53,10 +53,10 @@ Linker script and memory map
  .data          0x20000004        0x0 startup.o
                 0x20000004                _E_DATA = .
 
-.igot.plt       0x20000004        0x0 load address 0x8000018c
+.igot.plt       0x20000004        0x0 load address 0x08000194
  .igot.plt      0x00000000        0x0 main.o
 
-.bss            0x20000004        0x0 load address 0x8000018c
+.bss            0x20000004        0x0 load address 0x08000194
                 0x20000004                _S_BSS = .
  *(.bss)
  .bss           0x20000004        0x0 main.o

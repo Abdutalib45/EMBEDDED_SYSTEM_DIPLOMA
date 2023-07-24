@@ -1,0 +1,229 @@
+//////////mapfile//////////
+
+
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+ROM              0x00000000         0x04000000         xrw
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+                0x00010000                . = 0x10000
+
+.startup        0x00010000       0x10
+ startup.o(.text)
+ .text          0x00010000       0x10 startup.o
+                0x00010000                reset
+
+.text           0x00010010       0x68
+ *(.text)
+ .text          0x00010010       0x18 main.o
+                0x00010010                main
+ .text          0x00010028       0x50 uart.o
+                0x00010028                uart
+
+.glue_7         0x00010078        0x0
+ .glue_7        0x00000000        0x0 linker stubs
+
+.glue_7t        0x00010078        0x0
+ .glue_7t       0x00000000        0x0 linker stubs
+
+.vfp11_veneer   0x00010078        0x0
+ .vfp11_veneer  0x00000000        0x0 linker stubs
+
+.v4_bx          0x00010078        0x0
+ .v4_bx         0x00000000        0x0 linker stubs
+
+.iplt           0x00010078        0x0
+ .iplt          0x00000000        0x0 startup.o
+
+.rel.dyn        0x00010078        0x0
+ .rel.iplt      0x00000000        0x0 startup.o
+
+.data           0x00010078       0x5c
+ *(.data)
+ .data          0x00010078        0x0 startup.o
+ .data          0x00010078       0x5c main.o
+                0x00010078                name
+ .data          0x000100d4        0x0 uart.o
+ *(.rodata)
+
+.igot.plt       0x000100d4        0x0
+ .igot.plt      0x00000000        0x0 startup.o
+
+.bss            0x000100d4        0x0
+ *(.bss)
+ .bss           0x000100d4        0x0 startup.o
+ .bss           0x000100d4        0x0 main.o
+ .bss           0x000100d4        0x0 uart.o
+                0x000111d4                . = (. + 0x1100)
+                0x000111d4                stack_top = .
+LOAD startup.o
+LOAD main.o
+LOAD uart.o
+OUTPUT(app.elf elf32-littlearm)
+
+.ARM.attributes
+                0x00000000       0x2e
+ .ARM.attributes
+                0x00000000       0x22 startup.o
+ .ARM.attributes
+                0x00000022       0x32 main.o
+ .ARM.attributes
+                0x00000054       0x32 uart.o
+
+.comment        0x00000000       0x11
+ .comment       0x00000000       0x11 main.o
+                                 0x12 (size before relaxing)
+ .comment       0x00000000       0x12 uart.o
+
+
+
+
+
+//////////////////sympols///////////
+$ arm-none-eabi-objdump.exe -h main.o
+
+main.o:     file format elf32-littlearm
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000018  00000000  00000000  00000034  2**2
+                  CONTENTS, ALLOC, LOAD, RELOC, READONLY, CODE
+  1 .data         0000005c  00000000  00000000  0000004c  2**2
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000000  00000000  00000000  000000a8  2**0
+                  ALLOC
+  3 .comment      00000012  00000000  00000000  000000a8  2**0
+                  CONTENTS, READONLY
+  4 .ARM.attributes 00000032  00000000  00000000  000000ba  2**0
+                  CONTENTS, READONLY
+-----------------------------------
+uart.o:     file format elf32-littlearm
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000050  00000000  00000000  00000034  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000000  00000000  00000000  00000084  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000000  00000000  00000000  00000084  2**0
+                  ALLOC
+  3 .comment      00000012  00000000  00000000  00000084  2**0
+                  CONTENTS, READONLY
+  4 .ARM.attributes 00000032  00000000  00000000  00000096  2**0
+                  CONTENTS, READONLY
+--------------------------------------
+app.elf:     file format elf32-littlearm
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .startup      00000010  00010000  00010000  00008000  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .text         00000068  00010010  00010010  00008010  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .data         0000005c  00010078  00010078  00008078  2**2
+                  CONTENTS, ALLOC, LOAD, DATA
+  3 .ARM.attributes 0000002e  00000000  00000000  000080d4  2**0
+                  CONTENTS, READONLY
+  4 .comment      00000011  00000000  00000000  00008102  2**0
+                  CONTENTS, READONLY
+
+
+
+/////////////////////////////////////////
+
+
+/////main.c/////////
+
+
+
+#include "uart.h"
+unsigned char name[90]="LEARN-IN-DEPTH<ABDULRAHMAN ABUTALIB>";
+void main (void)
+{
+    uart(name);
+
+
+}
+
+///////uart.c/////////
+
+
+
+
+#define UART0RG *((volatile unsigned int*)0x101f1000)
+void uart(unsigned char *name)
+{
+   while (*name!=0)
+	{
+	    UART0RG=(unsigned int)*name;
+	    name++;	
+	
+	}
+		
+
+
+
+}
+///////uart.h////////
+
+
+#ifndef _UART_H_
+#define _UART_H_
+void uart(unsigned char *);
+#endif
+
+
+
+
+
+
+
+//////startp.s///////
+
+
+
+
+@@abdulrahman abutalib
+.global reset
+reset:
+	ldr sp, =stack_top
+	bl main
+
+stay: b stay
+
+
+/////////////linker.ld///////////
+
+ENTRY(reset)
+
+MEMORY
+{
+	ROM (rwx): ORIGIN = 0x00000000,	LENGTH = 64M
+}
+SECTIONS
+{
+	. = 0x10000;
+	.startup . :
+	{
+		startup.o(.text)
+	}> ROM
+	.text :
+	{
+		*(.text)
+	}> ROM
+	.data :
+	{
+		*(.data) *(.rodata)
+	}> ROM
+	.bss :
+	{
+		*(.bss)
+	}> ROM
+	. = . + 0x1100;
+	stack_top = .;
+}
+///////////////////////////

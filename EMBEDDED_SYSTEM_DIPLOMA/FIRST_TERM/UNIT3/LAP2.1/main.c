@@ -9,7 +9,7 @@ typedef union
 	volatile unsigned int all_ports;
 	struct
 	{
-		volatile unsigned int :12;
+		volatile unsigned int :13;
 		volatile unsigned int p_13 :1;
 		
 	}sport;
@@ -25,9 +25,9 @@ while (1)
 {
 	int i=0;
 	ptr->sport.p_13=1;
-	for(i=0;i<60;i++);
+	for(i=0;i<1600;i++);
 	ptr->sport.p_13=0;
-	for(i=0;i<60;i++);
+	for(i=0;i<1600;i++);
 }
 return 0;
 }
