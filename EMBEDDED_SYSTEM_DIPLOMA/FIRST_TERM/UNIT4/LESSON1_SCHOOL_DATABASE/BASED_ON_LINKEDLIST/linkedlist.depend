@@ -1,0 +1,16 @@
+# depslib dependency file v1.0
+1690596886 source:d:\embedded\mz\aaaa\linkedlist\linkedlist.c
+	<stdlib.h>
+	"linkedlist.h"
+	<stdio.h>
+
+1690595824 d:\embedded\mz\aaaa\linkedlist\linkedlist.h
+	<stdint.h>
+	"configuration.h"
+
+1690590066 d:\embedded\mz\aaaa\linkedlist\configuration.h
+
+1690596757 source:d:\embedded\mz\aaaa\linkedlist\main.c
+	"linkedlist.h"
+	<stdio.h>
+

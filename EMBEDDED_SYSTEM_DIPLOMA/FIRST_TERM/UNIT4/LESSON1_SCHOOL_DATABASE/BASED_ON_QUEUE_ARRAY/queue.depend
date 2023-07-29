@@ -1,0 +1,16 @@
+# depslib dependency file v1.0
+1690654112 source:d:\embedded\mz\aaaa\queue\main.c
+	<stdio.h>
+	<stdlib.h>
+	<stdint.h>
+	"queue.h"
+
+1690654180 d:\embedded\mz\aaaa\queue\queue.h
+	"configuration.h"
+
+1690655614 d:\embedded\mz\aaaa\queue\configuration.h
+
+1690655235 source:d:\embedded\mz\aaaa\queue\queue.c
+	"queue.h"
+	"stdint.h"
+

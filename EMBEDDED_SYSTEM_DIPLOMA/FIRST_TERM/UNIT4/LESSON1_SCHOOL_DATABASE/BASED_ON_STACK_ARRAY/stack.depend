@@ -1,0 +1,18 @@
+# depslib dependency file v1.0
+1690647397 source:d:\embedded\mz\aaaa\stack\main.c
+	<stdio.h>
+	<stdlib.h>
+	<stdint.h>
+	"stack.h"
+
+1690644314 d:\embedded\mz\aaaa\stack\stack.h
+	"configuration.h"
+	<stdint.h>
+
+1690643576 d:\embedded\mz\aaaa\stack\configuration.h
+
+1690646456 source:d:\embedded\mz\aaaa\stack\stack.c
+	"stack.h"
+	<stdio.h>
+	<stdint.h>
+
