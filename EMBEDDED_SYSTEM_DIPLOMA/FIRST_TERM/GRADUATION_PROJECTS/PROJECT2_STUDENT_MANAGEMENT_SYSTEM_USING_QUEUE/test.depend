@@ -1,0 +1,20 @@
+# depslib dependency file v1.0
+1692542077 source:d:\embedded\ks\embedded_system_diploma\embedded_system_diploma\first_term\graduation_projects\project2_student_management_system_using_queue\main.c
+	<stdio.h>
+	<stdint.h>
+	"share.h"
+	<string.h>
+	"queue.h"
+	<conio.h>
+
+1692484897 d:\embedded\ks\embedded_system_diploma\embedded_system_diploma\first_term\graduation_projects\project2_student_management_system_using_queue\share.h
+
+1692484890 d:\embedded\ks\embedded_system_diploma\embedded_system_diploma\first_term\graduation_projects\project2_student_management_system_using_queue\queue.h
+
+1692542018 source:d:\embedded\ks\embedded_system_diploma\embedded_system_diploma\first_term\graduation_projects\project2_student_management_system_using_queue\queue.c
+	<stdio.h>
+	<stdint.h>
+	"queue.h"
+	<string.h>
+	"share.h"
+

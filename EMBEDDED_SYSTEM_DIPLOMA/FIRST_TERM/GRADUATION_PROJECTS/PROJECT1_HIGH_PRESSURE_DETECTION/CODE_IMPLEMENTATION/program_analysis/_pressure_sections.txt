@@ -1,0 +1,29 @@
+
+pressure_detection.elf:     file format elf32-littlearm
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000003f8  08000000  08000000  00008000  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000004  20000000  080003f8  00010000  2**2
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          0000001d  20000004  080003fc  00010004  2**2
+                  ALLOC
+  3 .debug_info   0000078a  00000000  00000000  00010004  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_abbrev 0000040e  00000000  00000000  0001078e  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_loc    000003a0  00000000  00000000  00010b9c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_aranges 000000e0  00000000  00000000  00010f3c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   00000383  00000000  00000000  0001101c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_str    00000336  00000000  00000000  0001139f  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .comment      00000011  00000000  00000000  000116d5  2**0
+                  CONTENTS, READONLY
+ 10 .ARM.attributes 00000033  00000000  00000000  000116e6  2**0
+                  CONTENTS, READONLY
+ 11 .debug_frame  00000290  00000000  00000000  0001171c  2**2
+                  CONTENTS, READONLY, DEBUGGING
